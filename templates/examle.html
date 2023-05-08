@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="author" content="Национальный исследовательский университет Московский Энергетический Институт">
+        <title>
+
+                Программа математического и компьютерного моделирования систем, имеющих структуру циклической проективной геометрии
+
+
+        </title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/2.3.2/cosmo/bootstrap.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/favicon.ico">
+
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="http://mm.mpei.ac.ru:8080/aal">
+
+                        Алгебраический процессор
+
+
+                </a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li >
+                            <a href="1">
+
+                                    ЛРП
+
+
+                            </a>
+                        </li>
+                        <li  class="active" >
+                            <a href="2">
+
+                                    ЛКП
+
+
+                            </a>
+                        </li>
+                        <li  class="active" >
+                            <a href="3">
+
+                                    BBS-генератор
+
+
+                            </a>
+                        </li>
+                        <li  class="active" >
+                            <a href="4">
+
+                                    SEAL
+
+
+                            </a>
+                        </li>
+                        <li><a href="index.html#myModal" data-toggle="modal">
+                            Справка
+
+                        </a></li>
+                    </ul>
+                </div>
+                <form action="index.html#" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="PVJTbnPoXTHB9chEsXCwODceqZD7NRGyotOc4hB9KJ1mrZ3GcaDvINj4AukUpF5G">
+                    <input type="hidden" name="lng" value="True">
+                    <div  class="pull-right">
+                                <button class="btn btn-block" name="lg" input type="submit" value="RU">
+                                    RU
+
+                                </button>
+                            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <form action="index.html#" method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="PVJTbnPoXTHB9chEsXCwODceqZD7NRGyotOc4hB9KJ1mrZ3GcaDvINj4AukUpF5G">
+        <input type="hidden" name="x" value="">
+        <input type="hidden" name="dfst" value="">
+        <div class="container-fluid">
+
+
+            <div class="row-fluid">
+                <div class="span4 tablet-span12">
+                    <h5 title=
+"Примечание:
+1)Если входные параметры не заданы с помощью поля «Параметры PG(d,n)», или
+с помощью тестов в полях моделирования коммуникаций, то использование
+остальных полей интерфейса программы не доступно.
+2)Ограничения: вводимые параметры l, d  – целые числа.
+3)Параметры: p,n,v,k - целые числа; f - строка, записанная в виде коэффициентов
+многочлена в порядке возрастания его степеней.">
+
+                        Построение линейной рекуррентной последовательности по закону рекурсии:
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span4" title=
+"d – степень PG(d,n), d=2 или d=3, если d=2 (d=3), то
+PG(2,n) (PG(3,n)) называется плоскостью (геометрией)
+
+">
+                            <span class="add-on">d=</span>
+                            <input class="span8" name="d" type="number" min="2" max="3"
+                                onchange="$('.k').attr('min', this.value)" value="">
+                        </div>
+                        <div class="input-prepend span4" title=
+"p – характеристика поля, p - простое число
+
+">
+                            <span class="add-on">p=</span>
+                            <input  class="span8" name="p" type="text" value="">
+                        </div>
+                        <div class="input-prepend span4"
+                            title=
+"l – степень расширения поля заданной характеристики, l >= 1
+
+">
+                            <span class="add-on">l=</span>
+                            <input class="span8 l" name="l" type="number" min="1" value="">
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="input-prepend span4" title=
+"n – порядок поля, n = p^l
+
+">
+                            <span class="add-on">n=p<sup>l</sup>=</span>
+                            <input class="span6" name="n" readonly="readonly" type="text" value="">
+                        </div>
+                        <div class="span7">
+                            <button class="btn btn-block" name="b1" type="submit">
+                                Задать параметры
+
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="input-prepend span4" title=
+"f - неприводимый примитивный многочлен степени l над полем характеристики 2,
+записанный в виде его коэффициентов в порядке возрастания степеней.
+
+">
+                            <span class="add-on">f=</span>
+                            <input class="span8" name="f" readonly="readonly" type="text" value="">
+                        </div>
+                        <div class="input-prepend span8" title=
+"g - неприводимый примитивный многочлен степени d+1 над расширением поля характеристики 2,
+записанный в виде его коэффициентов в порядке возрастания степеней.
+
+">
+                            <span class="add-on">g=</span>
+                            <input class="span10" name="g" readonly="readonly" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="input-prepend span4" title=
+"v - количество элементов и блоков в PG(d,n), если d=2, то v = n^2 + n + 1,
+или если d=3, то v = n^3 + n^2 + n + 1.
+
+">
+                            <span class="add-on">v=</span>
+                            <input class="span8" readonly="readonly" name="v" type="text" value="">
+                        </div>
+                        <div class="input-prepend span4"
+                            title=
+"k – количество элементов в блоке и сколько раз встречается каждый элемент в PG(d,n),
+если d=2, то k = n + 1, или если d=3, то k = n^2 + n + 1.
+
+">
+                            <span class="add-on">k=</span>
+                            <input class="span8" readonly="readonly" name="k" type="text" value="">
+                        </div>
+                        <div class="input-prepend span4"
+                            title=
+"Λ – количество блоков, в которых встречается заданный элемент в PG(d,n), если d=2, то Λ = 1,
+или если d=3, то Λ = n + 1.
+
+">
+                            <span class="add-on">Λ=</span>
+                            <input class="span8" readonly="readonly" name="Λ" type="text" value="">
+                        </div>
+                    </div>
+                    <h5 title=
+"Поле «Построение PG(d,n) (при малых n)» позволяет построить и вывести все блоки и дуальные блоки PG(d,n).
+При выводе блоков PG(d,n), для каждого указывается его номер и список номеров элементов этого блока.
+При выводе дуальных блоков DPG(d,n), для каждого указывается его номер (равный номеру элемента, который
+содержится в номерах блоков, указанных в этом дуальном блоке) и список номеров элементов этого блока.
+
+">
+                        Построение PG(d, n) (при малых n):
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <button class="btn btn-block" disabled name="blockbutt" type="submit">
+                                Построить v блоков<br />PG(d,n)<br />по k элементов
+
+                            </button>
+                            <textarea class="span12" readonly="readonly" name="blocks" rows="5"></textarea>
+                        </div>
+                        <div class="span6">
+                            <button class="btn btn-block" disabled name="dblockbutt" type="submit">
+                                Построить v блоков<br />DPG(d,n)<br />по k элементов
+
+                            </button>
+                            <textarea style="position: relative; z-index: 1000;" readonly="readonly" class="span12" name="dblocks"
+                                rows="5"></textarea>
+                        </div>
+                    </div>
+                    <h5>
+                        Построение блока (k элементов) из PG(d,n) по его номеру bn:
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span8"
+                            title=
+"bn - номер блока PG(d,n), который необходимо построить, причём 0&lt;=bn&lt;=(v-1).
+
+">
+                            <span class="add-on span2">bn=</span>
+                            <input class="span10" name="obn" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span4">
+                            <button class="btn btn-block" disabled name="pg1" type="submit">
+                                Блок PG(d,n)
+
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row-fluid" title=
+"block - список элементов блока с номером bn PG(d,n).
+
+">
+                        <div class="input-prepend span12">
+                            <span class="add-on span2">block =</span>
+                            <input class="span10" name="block" type="text" readonly="readonly" value="">
+                        </div>
+                    </div>
+                    <h5>
+                        Построение дуального блока (k элементов) из DPG(d,n) по его номеру dbn:
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span8" title=
+"dbn - номер блока DPG(d,n), который необходимо построить.
+Номер dbn равен номеру элемента PG(d,n), который содержится в
+блоках PG(d,n), номера которых есть элементы этого дуального блока.
+
+">
+                            <span class="add-on span2">dbn=</span>
+                            <input class="span10" name="dbn" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span4">
+                            <button class="btn btn-block" disabled name="dpg1" type="submit">
+                                Блок DPG(d,n)
+
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="input-prepend span12" title=
+"dualblock - список номеров элементов дуального блока
+
+">
+                            <span class="add-on span3">dualblock =</span>
+                            <input class="span9" name="dualblock" type="text" readonly="readonly" value="">
+                        </div>
+                    </div>
+                    <h5>
+                        Пересечение блоков, имеющих номера bn1 и bn2
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span4" title=
+"bn1 - номер блока PG(d,n), причём 0 <= bn1 <= (v-1).
+
+">
+                            <span class="add-on">bn1=</span>
+                            <input class="span8" name="bn1" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="input-prepend span4" title=
+"bn2 - номер блока PG(d,n), причём 0 <= bn2 <= (v-1)
+
+">
+                            <span class="add-on">bn2=</span>
+                            <input class="span8" name="bn2" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span4">
+                            <button class="btn btn-block" disabled name="pg2" type="submit">
+                                Пересечение
+
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row-fluid" title=
+"Пересечние блоков PG(d,n), одновременно содержащих элементы с номерами bn1 и bn2.
+
+">
+                        <div class="input-prepend span12">
+                            <span class="add-on span2">res =</span>
+                            <input class="span10" name="res1" type="text" readonly="readonly" value="">
+                        </div>
+                    </div>
+                    <h5>
+                        Пересечение дуальных блоков, имеющих номера dbn1 и dbn2
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span4" title=
+"dbn1 - номер блока DPG(d,n) (равный номеру элемента PG(d,n)),
+причём 0 <= dbn1 <= (v-1).
+
+">
+                            <span class="add-on">dbn1=</span>
+                            <input class="span8" name="dbn1" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="input-prepend span4" title=
+"dbn2 - номер блока DPG(d,n) (равный номеру элемента PG(d,n)),
+причём 0 <= dbn2 <= (v-1).
+
+">
+                            <span class="add-on">dbn2=</span>
+                            <input class="span8" name="dbn2" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span4">
+                            <button class="btn btn-block" disabled name="dpg2" type="submit">
+                                Пересечение
+
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row-fluid" title=
+"Пересечние блоков DPG(d,n) - список номеров блоков PG(d,n),
+одновременно содержащих элементы с номерами dbn1 и dbn2.
+
+">
+                        <div class="input-prepend span12">
+                            <span class="add-on span2">res =</span>
+                            <input class="span10" name="res2" type="text" readonly="readonly" value="">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="span8 tablet-span12">
+                    <h4>
+                        Ограничения БСС для моделирования распределённых вычислительных систем
+
+                    </h4>
+
+                    <h5 title=
+"Чтобы изменить максимальное количество компьютеров внешней/внутренней сети, исключение
+которых не приводит к исключению этой сети, введите значение w >= 0 в поле
+и нажмите кнопку «Set».
+
+">
+                        w - максимальное количество компьютеров внешней/внутренней сети, исключение которых не приводит к исключению этой сети
+                        </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span2"
+                            title=
+"w - количество компьютеров внешней/внутренней сети, исключение которых приводит к исключению этой сети.
+
+">
+                            <span class="add-on">w =</span>
+                            <input class="span8" name="w" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span1"><button class="btn btn-block" disabled name="wbut"
+                                type="submit">Set</button></div>
+                    </div>
+
+                    <h5 title=
+"1) Чтобы исключить (добавить) компьютеры (an;bn), n - целое, необходимо
+заполнить список list в формате [[a1,b1],[a2,b2],[a3,b3],...,[an,bn]] и нажать
+кнопку Add (Del).
+2) Чтобы исключить (добавить) один компьютер необходимо заполнить
+поля a1 и b1 и нажать кнопку Add (Del).
+3) Чтобы исключить (добавить) все пары номеров блоков необходимо
+нажать кнопку «Запретить все» («Разрешить все»).
+
+">
+                        L_pc - список идентификаторов (a1,b1) исключенных компьютеров
+                        </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span2"
+                            title=
+"a1 - элемент идетификатора, равный номеру блока, причём 0<=a1<v.
+
+">
+                            <span class="add-on">a1=</span>
+                            <input class="span8" name="pcn1" pattern="[0-9]+" type="text" value="">
+                        </div>
+                        <div class="input-prepend span2"
+                            title=
+"b1 - элемент идетификатора, равный элементу блока с номером b1 (номеру дуального блока),
+причём 0<=b<v, a<b.
+
+">
+                            <span class="add-on">b1=</span>
+                            <input class="span8" name="pcn2" pattern="[0-9]+" type="text" value="">
+                        </div>
+                        <div class="span1"><button class="btn btn-block" disabled name="pca"
+                                type="submit">Add</button></div>
+                        <div class="span1"><button class="btn btn-block" disabled name="pcd"
+                                type="submit">Del</button></div>
+                        <div class="span3"><button class="btn btn-block" disabled name="pco" type="submit">
+                            Разрешить все
+
+                        </button></div>
+                        <div class="span3"><button class="btn btn-block" disabled name="pcn" type="submit">
+                            Запретить все
+
+                        </button></div>
+                    </div>
+                    <div class="row-fluid" title=
+"L_pc - список идентификаторов (a1,b1) исключенных компьютеров.
+
+ ">
+                        <div class="span2">L_pc:</div>
+                        <div class="span10"><textarea class="span12" name="L_pc"
+                                rows="3"></textarea></div>
+                    </div>
+
+                    <h5 title=
+"1) Чтобы исключить (разрешить) список внутренних связей [an, bn], n - целое,
+an - номер блока, bn - элемент из этого блока, необходимо заполнить список list в
+формате: [[a1, b1], [a2, b2], [a3, b3],...,[an, bn]] и нажать кнопку Add(Del).
+2) Чтобы исключить (разрешить) внутреннюю связь [a2, b2] необходимо заполнить
+поля a2 (номер блока) и b2 (элемент блока) и нажать кнопку Add(Del).
+3) Чтобы разрешить (исключить) все внутренние связи необходимо нажать кнопку
+«Разрешить все» («Запретить все»).
+
+">
+                        L_internal_subnets - список исключенных внутренних связей
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span2"
+                            title=
+"a2 - номер блока в добавляемой (исключаемой) паре: номер блока и компьютер из этого блока,
+причём 0<=a2<=(b-1).
+
+">
+                            <span class="add-on">a2=</span>
+                            <input class="span8" name="lbn" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="input-prepend span2"
+                            title=
+"b2 - номер компьютера в добавляемой (исключаемой) паре: номер блока и компьютер из этого
+блока, причём 0<=b2<v.
+
+">
+                            <span class="add-on">b2=</span>
+                            <input class="span8" name="lpcn" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span1"><button class="btn btn-block" disabled name="bpca"
+                                type="submit">Add</button></div>
+                        <div class="span1"><button class="btn btn-block" disabled name="bpcd"
+                                type="submit">Del</button></div>
+                        <div class="span3"><button class="btn btn-block" disabled name="bpco" type="submit">
+                            Разрешить все
+
+                        </button></div>
+                        <div class="span3"><button class="btn btn-block" disabled name="bpcn" type="submit">
+                            Запретить все
+
+                        </button></div>
+                    </div>
+                    <div class="row-fluid" title=
+"L_internal_subnets - список идентификаторов (a2,b2) исключенных внутренних связей.
+
+">
+                        <div class="span2">L_internal_subnets:</div>
+                        <div class="span10"><textarea class="span12" name="L_blpc"
+                                rows="3"></textarea></div>
+                    </div>
+
+                    <h5 title=
+"1) Чтобы исключить (разрешить) список внешних связей [an, bn], n - целое, bn - номер
+дуального блока, an - элемент из этого дуального блока, необходимо заполнить список
+list в формате: [[a1, b1], [a2, b2], [a3, b3],...,[an, bn]] и нажать кнопку Add(Del).
+2) Чтобы исключить (разрешить) внешнюю связь [a3, b3] необходимо заполнить поля a3
+(элемент дуального блока) и b3 (номер дуального блока) и нажать кнопку Add(Del).
+3) Чтобы разрешить (исключить) все внешние связи необходимо нажать кнопку «Разрешить все»
+(«Запретить все»).
+
+">
+                        L_external_subnets - список исключенных внешних связей
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span2"
+                            title=
+"a3 - номер компьютера в добавляемой(исключаемой) паре: номер дуального блока и компьютер
+из этого дуального блока, причём 0<=a3<v.
+
+">
+                            <span class="add-on">a3=</span>
+                            <input class="span8" name="ldpcn" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="input-prepend span2"
+                            title=
+"b3 - номер дуального блока в добавляемой(исключаемой) паре: компьютер из дуального блока
+и номер этого блока, причём 0<=b3<=(b-1).
+
+">
+                            <span class="add-on">b3=</span>
+                            <input class="span8" name="ldbn" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span1"><button class="btn btn-block" disabled name="dbpca"
+                                type="submit">Add</button></div>
+                        <div class="span1"><button class="btn btn-block" disabled name="dbpcd"
+                                type="submit">Del</button></div>
+                        <div class="span3"><button class="btn btn-block" disabled name="dbpco" type="submit">
+                            Разрешить все
+
+                        </button></div>
+                        <div class="span3"><button class="btn btn-block" disabled name="dbpcn" type="submit">
+                            Запретить все
+
+                        </button></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2" title=
+"L_internal_subnets - список идентификаторов (a3,b3) исключенных внешних связей.
+
+">L_external_subnets:</div>
+                        <div class="span10"><textarea class="span12" name="L_dblpc"
+                                rows="3"></textarea></div>
+                    </div>
+
+                    <h5 title=
+"Чтобы исключить (реализовать) внутренние подсети (номера блоков)
+необходимо заполнить границы диапозона номеров блока: от a4 до b4,
+при этом если a4 = b4, то исключается (разрешается) один блок с
+номером a4, и далее нажать кнопку Del (Add).
+
+">
+                        L_internal_networks - список номеров реализованных внутренних подсетей (номеров блоков)
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span2"
+                            title=
+"a4 - левая граница добавляемого (исключаемого) диапозона внутренних подсетей
+(номеров блоков): от a4 до b4, причём 0<=a4<=(v-1) и a4!=b4.
+
+">
+                            <span class="add-on">a4=</span>
+                            <input class="span8" name="lbn1" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="input-prepend span2"
+                            title=
+"b4 - правая граница добавляемого(исключаемого) диапозона внутренних подсетей
+(номеров блоков): от a4 до b4, причём 0<=b4<=(v-1) и a4!=b4.
+
+">
+                            <span class="add-on">b4=</span>
+                            <input class="span8" name="lbn2" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span1"><button class="btn btn-block" disabled name="lba"
+                                type="submit">Add</button></div>
+                        <div class="span1"><button class="btn btn-block" disabled name="lbd"
+                                type="submit">Del</button></div>
+                        <div class="input-prepend span6">
+                            <span class="add-on span3" title=
+"L_internal_networks - список номеров реализованных внутренних подсетей (номеров блоков).
+
+">L_internal_networks=</span>
+                            <input class="span9" name="L_block" type="text" value="">
+                        </div>
+                    </div>
+
+                    <h5 title=
+"Чтобы исключить (реализовать) внешние подсети (номера дуальных блоков)
+необходимо заполнить границы диапозона номеров блока: от a5 до b5, при
+этом если a5 = b5, то исключается (разрешается) один дуальный блок с
+номером a5, и далее нажать кнопку Del (Add).
+
+">
+                        L_external_networks - список номеров реализованных внешних подсетей (номеров дуальных блоков)
+
+                    </h5>
+                    <div class="row-fluid">
+                        <div class="input-prepend span2"
+                            title=
+"a5 - левая граница добавляемого (исключаемого) диапозона номеров блоков: от a5 до b5,
+причём 0<=a5<=(v-1) и a5!=b5.
+
+">
+                            <span class="add-on">a5=</span>
+                            <input class="span8" name="ldbn1" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="input-prepend span2"
+                            title=
+"b5 - правая граница добавляемого (исключаемого) диапозона номеров блоков: от a5 до b5,
+причём 0<=b5<=(v-1) и a5!=b5.
+
+">
+                            <span class="add-on">b5=</span>
+                            <input class="span8" name="ldbn2" type="text" pattern="[0-9]+" value="">
+                        </div>
+                        <div class="span1"><button class="btn btn-block" disabled name="ldba"
+                                type="submit">Add</button></div>
+                        <div class="span1"><button class="btn btn-block" disabled name="ldbd"
+                                type="submit">Del</button></div>
+                        <div class="input-prepend span6">
+                            <span class="add-on span3" title=
+"L_external_networks - список номеров реализованных внешних подсетей (номеров блоков).
+
+">L_external_networks=</span>
+                            <input class="span9" name="L_dblock" type="text" value="">
+                        </div>
+                    </div>
+
+                    <h4 title=
+"Чтобы проверить коммуникацию узлов (компьютеров) БСС необходимо ввести их идентификаторы
+в поля: «j1» и «j2», где первый элемент пары это номер внутренней подсети (номер блока), а
+второй - это номер внешней подсети (номер дуального блока) и нажать кнопку «Коммуникация».
+
+">
+                        Параметры коммуникации БСС
+
+                    </h4>
+
+                    <div class="row-fluid">
+                        <h5 title=
+"Всего 6 режимов вывода.
+
+">
+                            Режимы вывода
+
+                        </h5>
+                        <div class="span6">
+                            <label><input type="radio" checked name="dva" id="dva1" value="1"/> Простой вывод          </label>
+                            <label><input type="radio"  name="dva" id="dva4" value="4"/> Простой вывод с ключами  </label>
+
+                            <label><input type="radio"  name="dva" id="dva2" value="2"/> С ключами без роутеров </label>
+                            <label><input type="radio"  name="dva" id="dva3" value="3"/> С ключами и роутерами  </label>
+
+                            <label class="checkbox inline">
+                                <input type="checkbox" name="symb" >
+                                В символьном виде
+
+
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span3"
+                            title=
+"j1 - это первая пара: номер внутренней сети (блока) и номер внешней сети (дуального блока) компьютера для коммуникации.
+
+">
+                            <label>j1 =
+                                (<input type="text" name="j1" value="" pattern="[0-9]+" class="span3 nomargin"> ,
+                                <input type="text" name="j11" value="" pattern="[0-9]+"
+                                    class="span3 nomargin">)</label>
+                        </div>
+                        <div class="span3"
+                            title=
+"j2 - это вторая пара: номер внутренней сети (блока) и номер внешней сети (дуального блока) компьютера для коммуникации.
+
+">
+                            <label>j2 =
+                                (<input type="text" name="j2" value="" pattern="[0-9]+" class="span3 nomargin"> ,
+                                <input type="text" name="j22" value="" pattern="[0-9]+"
+                                    class="span3 nomargin">)</label>
+
+                        </div>
+                        <div class="span3"><button class="btn btn-block" disabled name="alg1"
+                                type="submit">
+                            Коммуникация
+
+                        </button>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <h5 title=
+"В поле «Моделирование коммуникации в распределённой вычислительной системе» выводится сообщение
+о коммуникации компьютеров вычислительной системы.
+
+">
+                                Моделирование коммуникации в распределённой вычислительной системе со структурой
+                                CPG(d,n) из v*k компьютеров
+
+                            </h5>
+                            <div class="row-fluid">
+                                <div class="span2">
+                                    <button class="btn btn-block" name="t1" type="submit">
+                                        Тест 1
+                                    </button>
+                                </div>
+                                <div class="span2">
+                                    <button class="btn btn-block" name="t2" type="submit">
+                                        Тест 2
+                                    </button>
+                                </div>
+                                <div class="span2">
+                                    <button class="btn btn-block" name="t3" type="submit">
+                                        Тест 3
+                                    </button>
+                                </div>
+                                <div class="span2">
+                                    <button class="btn btn-block" name="t4" type="submit">
+                                        Тест 4
+                                    </button>
+                                </div>
+                                <div class="span2">
+                                    <button class="btn btn-block" name="t5" type="submit">
+                                        Тест 5
+                                    </button>
+                                </div>
+                                <div class="span2">
+                                    <button class="btn btn-block" name="t55" type="submit">
+                                        Тест 6
+                                    </button>
+                                </div>
+                            </div>
+                            <textarea class="span12" readonly="readonly" name="out1" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <hr>
+    <footer>
+        <small class="muted">
+            © Национальный Исследовательский Университет «Московский Энергетический Институт»
+
+        </small>
+    </footer>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-header">
+            <button type="submit" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 id="myModalLabel">
+                О программе
+
+            </h4>
+        </div>
+        <div class="modal-body">
+            <p class="text-center">
+                ФГБОУ ВО "НИУ "МЭИ"
+
+            </p>
+            <p class="text-center">
+                Институт ИВТ
+
+            </p>
+            <p class="text-center">
+                Кафедра МКМ
+
+            </p>
+            <h5 class="text-center">
+                Программа математического и компьютерного моделирования систем,
+                имеющих структуру циклической проективной геометрии.
+
+            </h5><br />
+            <p class="text-right">
+                Разработчик программы: Кочетова Наталья Петровна
+
+            </p>
+            <p class="text-right">
+                Разработчик интерфейса: Винников Александр Михайлович
+
+            </p>
+            <p class="text-right">
+                Руководитель: проф. Фролов Александр Борисович
+
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                Закрыть
+
+            </button>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</html>

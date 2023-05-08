@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'styles/LRP.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="m-3">
+        <h4> Алгоритм Берликемпа-Месси построения минимального многочлена </h4>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-2">
+
+            <label class="label-lrp" for="fild">Характеристика поля:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="fi">p:</span>
+                <select id="field">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

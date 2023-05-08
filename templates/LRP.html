@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <script type="text/javascript" src={% static "js/LRP.js" %}></script>
+{% endblock %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'styles/LRP.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="m-3">
+        <h4> Построение линейной рекуррентной последовательности по закону рекурсии</h4>
+    </div>
+    <div class="row m-3">
+        <div class='col-3'>
+            <label for="pol1" class="label-lrp">Введите характеристический многочлен</label>
+        </div>
+        <div class='col-3'>
+            <label for="pol0" class="label-lrp">Введите начальное состояние</label>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class='col-3'>
+
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="p1">P</span>
+                <input type="text" class="form-control" placeholder="многочлен" id="pol1" pattern="^[01]*$"
+                       required aria-describedby="p1">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-dark" id="lrp_start">Начать расчеты</button>
+
+        </div>
+        <div class='col-3'>
+
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="p2">P'</span>
+                <input type="text" class="form-control" placeholder="начальное состояние" id="pol0" pattern="^[01]*$"
+                       required aria-describedby="p2">
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-2">
+
+            <label class="label-lrp" for="k">Длина полинома - 1:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="k_">k:</span>
+                <input type="text" class="form-control" id="k" pattern="^[01]*$"
+                       required aria-describedby="k_" readonly aria-label="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-2">
+
+            <label class="label-lrp" for="d">Длина периода ЛРП:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="d_">d:</span>
+                <input type="text" class="form-control" id="d"
+                       aria-describedby="d_" readonly aria-label="">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="label-lrp m-3">
+        Вычисление и включение в список очередных элементов ЛРП, всего добавляется d элементов
+        получился список L длины k+d:
+    </div>
+
+
+    <div class="col-9 m-3">
+        <div class="input-group flex-nowrap m-3">
+            <span class="input-group-text" id="L_">L</span>
+            <input type="text" class="form-control" id="L"
+                   aria-describedby="L_" readonly aria-label="">
+        </div>
+    </div>
+
+    <div class="label-lrp m-3">
+        Построение линейной рекуррентной последовательности по формуле общего члена
+        alfa при котором нет сдвига
+    </div>
+
+    <div class="col-3 m-3">
+        <div class="input-group flex-nowrap m-3">
+            <span class="input-group-text" id="alpha_">alpha</span>
+            <input type="text" class="form-control" id="alpha"
+                   aria-describedby="alfa_" readonly aria-label="">
+        </div>
+
+    </div>
+
+    <div class="label-lrp m-3">
+        Последовательность полученная по формуле общего члена
+    </div>
+
+    <div class="col-9 m-3">
+        <div class="input-group flex-nowrap m-3">
+            <span class="input-group-text" id="L_">L</span>
+            <input type="text" class="form-control" id="Lo"
+                   aria-describedby="L_" readonly aria-label="">
+        </div>
+    </div>
+
+    <div class="label-lrp m-3">
+        Убедимся, что последовательности, получающиеся двумя способами - по рекуррентом соотношению и по формуле общего члена удовлетворяют рекуррентному соотношению (сдвинуты одна относительно другой).
+для этого выведем с каого символа одна содержиться в другой
+    </div>
+
+    <div class="col-2 m-3">
+        <div class="input-group flex-nowrap m-3">
+            <span class="input-group-text" id="c_">c</span>
+            <input type="text" class="form-control" id="c"
+                   aria-describedby="c_" readonly aria-label="">
+        </div>
+    </div>
+
+{% endblock %}

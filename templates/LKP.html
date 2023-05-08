@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'styles/LRP.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="m-3">
+        <h4> Вычисление отрезка линейной конгруэнтной последовательности максимального периода с заданными 4
+            параметрами</h4>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-2">
+
+            <label class="label-lrp" for="x">Начальное значение x:</label>
+
+        </div>
+
+        <div class="col-3">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="x_">x:</span>
+                <input type="text" class="form-control" id="x" pattern="^[01]*$"
+                       required aria-describedby="x_">
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-2">
+
+            <label class="label-lrp" for="a">Множитель a:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="a_">a:</span>
+                <input type="text" class="form-control" id="a"
+                       aria-describedby="a_">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-2">
+
+            <label class="label-lrp" for="c">Приращение c:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="c_">c:</span>
+                <input type="text" class="form-control" id="c"
+                       aria-describedby="c_">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-2">
+
+            <label class="label-lrp" for="m">Модуль m:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="m_">m:</span>
+                <input type="text" class="form-control" id="m"
+                       aria-describedby="m_">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="m-3">
+        <button type="submit" class="btn btn-dark" id="lkp_start">Начать расчеты</button>
+    </div>
+
+     <div class="col-9 m-3">
+        <div class="input-group flex-nowrap m-3">
+            <span class="input-group-text" id="lkp_">ЛКП</span>
+            <input type="text" class="form-control" id="lkp"
+                   aria-describedby="lkp_" readonly aria-label="">
+        </div>
+    </div>
+
+{% endblock %}
