@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block scripts %}
-
+    <script type="text/javascript" src={% static "js/LKP.js" %}></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endblock %}
 
 {% block style %}
@@ -11,24 +13,11 @@
 
 {% block content %}
     <div class="m-3">
-        <h4> Вычисление отрезка линейной конгруэнтной последовательности максимального периода с заданными 4
-            параметрами</h4>
+        <h4> Вычисление элемента ЛКП, мощности ЛКП и тест максимального периода</h4>
     </div>
 
-    <div class="row m-3">
-        <div class="col-2">
-
-            <label class="label-lrp" for="x">Начальное значение x:</label>
-
-        </div>
-
-        <div class="col-3">
-            <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="x_">x:</span>
-                <input type="text" class="form-control" id="x" pattern="^[01]*$"
-                       required aria-describedby="x_">
-            </div>
-        </div>
+    <div class="m-3" style="font-size: 1.2em; font-weight: bold"> Закон рекурсии ЛКП: \(X_{n+1}=(aX_{n}+c)mod \ m,\
+        k>=0,\ a>2\)
     </div>
 
     <div class="row m-3">
@@ -68,30 +57,206 @@
     <div class="row m-3">
         <div class="col-2">
 
-            <label class="label-lrp" for="m">Модуль m:</label>
+            <label class="label-lrp" for="m">Модуль m,</label>
+            <br>
+            <label class="label-lrp" for="m">\(m=p^{e1}+q^{e2}\)</label>
 
         </div>
 
         <div class="col-1">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="m_">m:</span>
-                <input type="text" class="form-control" id="m"
-                       aria-describedby="m_">
+                <input type="text" class="form-control" id="m" value="2"
+                       aria-describedby="m_" readonly aria-label="">
+            </div>
+
+        </div>
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="p_">p:</span>
+                <input type="text" class="form-control" id="p" value="1"
+                       aria-describedby="p_">
+            </div>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="q_">q:</span>
+                <input type="text" class="form-control" id="q" value="1"
+                       aria-describedby="q_">
+            </div>
+
+        </div>
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="e_">e:</span>
+                <input type="text" class="form-control" id="e" value="1"
+                       aria-describedby="e_">
             </div>
 
         </div>
     </div>
 
-    <div class="m-3">
-        <button type="submit" class="btn btn-dark" id="lkp_start">Начать расчеты</button>
+    <div class="row m-3">
+        <div class="col-5">
+            <div class="m-3" style="font-size: 1.2em; font-weight: bold"> Тест максмальности периода</div>
+            <div class="alert alert-warning" id="tm_a">
+                <strong>Условия не выполнены</strong>
+                <div id="massage"></div>
+            </div>
+            <div class="alert alert-success" style="display: none;" id="tm_s">
+                <strong>Условия выполнены</strong>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="m-3" style="font-size: 1.2em; font-weight: bold"> Тест первообразности множителя</div>
+            <div class="alert alert-warning" id="tp_a">
+                <strong>Условия не выполнены</strong>
+            </div>
+            <div class="alert alert-success" style="display: none;" id="tp_s">
+                <strong>Условия выполнены</strong>
+            </div>
+        </div>
     </div>
 
-     <div class="col-9 m-3">
-        <div class="input-group flex-nowrap m-3">
-            <span class="input-group-text" id="lkp_">ЛКП</span>
-            <input type="text" class="form-control" id="lkp"
-                   aria-describedby="lkp_" readonly aria-label="">
+    <div class="m-3" style="font-size: 1.2em; font-weight: bold"> Мощность ЛКП</div>
+    <div class="row m-3">
+        <div class="col-5">
+            <div class="alert alert-warning" id="p_a">
+                <strong>Мощность не может быть вычисленна, так как b = a-1 не делится на все простые делители числа
+                    m</strong>
+            </div>
+            <div class="alert alert-success" style="display: none;" id="p_s">
+                <div id="power"></div>
+            </div>
         </div>
+    </div>
+
+    <div class="m-3" style="font-size: 1.2em; font-weight: bold"> Вычисление произвольного элемента ЛКП при заданном
+        элементе и законе рекурсии
+    </div>
+
+    <div class="row m-3">
+        <div class="col-3">
+
+            <label class="label-lrp" for="num_kn_el">Номер известного элемента:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="num_kn_el_">№:</span>
+                <input type="text" class="form-control" id="num_kn_el"
+                       aria-describedby="num_kn_el_">
+            </div>
+
+        </div>
+        <div class="col-2"></div>
+        <div class="col-2">
+
+            <label class="label-lrp" for="kn_el">Известный элемент:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="kn_el_"></span>
+                <input type="text" class="form-control" id="kn_el"
+                       aria-describedby="kn_el_">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-3">
+
+            <label class="label-lrp" for="num_des_el">Номер искомого элемента:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="num_des_el_">№</span>
+                <input type="text" class="form-control" id="num_des_el"
+                       aria-describedby="num_des_el_">
+            </div>
+
+        </div>
+        <div class="col-2"></div>
+        <div class="col-2">
+
+            <label class="label-lrp" for="des_el">Искомый элемент:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="des_el_"></span>
+                <input type="text" class="form-control" id="des_el"
+                       aria-describedby="des_el_" readonly aria-label="">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-8"></div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark" id="calculate_element">Вычислить</button>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col-5">
+            <div class="alert alert-warning" style="display: none;" id="c_a">
+                <strong> a и m не являются взаимно простыми числами</strong>
+            </div>
+        </div>
+    </div>
+    <div class="m-3" style="font-size: 1.2em; font-weight: bold">Получение ЛКП</div>
+    <div class="row m-3">
+        <div class="col-2">
+
+            <label class="label-lrp" for="x0">Начальное значение \( X_0\)</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="x0_">\( X_0\)</span>
+                <input type="text" class="form-control" id="x0"
+                       aria-describedby="x0_">
+            </div>
+
+        </div>
+        <div class="col-2"></div>
+        <div class="col-3">
+
+            <label class="label-lrp" for="l">Длина последовательности:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="l_">l</span>
+                <input type="text" class="form-control" id="l"
+                       aria-describedby="l">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-8"></div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark" id="calculate_lrp">Вычислить</button>
+        </div>
+    </div>
+
+    <div class="m-5">
+    <label for="lrp"  class="label-lrp">Полученное ЛКП:</label>
+    <textarea id="lrp" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
     </div>
 
 {% endblock %}

@@ -2,10 +2,102 @@
 {% load static %}
 
 {% block scripts %}
-
+    <script type="text/javascript" src={% static "js/BBS.js" %}></script>
 {% endblock %}
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'styles/LRP.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2> BBS </h2>
+    <div class="m-3">
+        <h4>BBS-генератор</h4>
+    </div>
+
+    <div class="m-3" style="font-size: 1.2em; font-weight: bold"> Параметры BBS
+    </div>
+    <div class="row mx-5 my-3">
+        <div class="col-1">
+
+            <label class="label-lrp" for="p">Число P:</label>
+
+        </div>
+
+        <div class="col-2">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="p_">P</span>
+                <input type="text" class="form-control" id="p" value="87178291199"
+                       aria-describedby="p_">
+            </div>
+
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1">
+
+            <label class="label-lrp" for="seed">Зерно:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="seed_"></span>
+                <input type="text" class="form-control" id="seed" value="1314"
+                       aria-describedby="seed_">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row mx-5 my-3">
+        <div class="col-1">
+
+            <label class="label-lrp" for="q">Число Q:</label>
+
+        </div>
+
+        <div class="col-2">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="q_">Q</span>
+                <input type="text" class="form-control" id="q" value="1125899839733759"
+                       aria-describedby="q_">
+            </div>
+
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1">
+
+            <label class="label-lrp" for="l">Длина:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="l_"></span>
+                <input type="text" class="form-control" id="l" value="1000"
+                       aria-describedby="l_">
+            </div>
+
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col-6">
+            <div class="alert alert-warning" style="display: none;" id="bbs_a">
+                <strong>Условия не выполнены </strong>
+                <div id="massage"></div>
+            </div>
+            <div class="alert alert-success" id="bbs_s">
+                <strong>Условия выполнены</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col-4"></div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark" id="calculate_bbs">Создать последовательность</button>
+        </div>
+    </div>
+    <div class="m-5">
+        <label for="lrp" class="label-lrp">Полученная последовательность:</label>
+        <textarea id="bbs" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+    </div>
 {% endblock %}

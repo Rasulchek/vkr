@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block scripts %}
-
+    <script type="text/javascript" src={% static "js/ABM.js" %}></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endblock %}
 
 {% block style %}
@@ -16,7 +18,7 @@
     </div>
 
     <div class="row m-3">
-        <div class="col-2">
+        <div class="col-3">
 
             <label class="label-lrp" for="fild">Характеристика поля:</label>
 
@@ -33,4 +35,83 @@
         </div>
     </div>
 
+    <div class="row m-3">
+        <div class="col-3">
+            <label class="label-lrp" for="an">Отрезок анализируемой ЛРП:</label>
+        </div>
+
+        <div class="col-3">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="an">P:</span>
+                <input type="text" class="form-control" id="anpol" pattern="^[01]*$"
+                       required aria-describedby="an">
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-6">
+        </div>
+        <div class="col-3">
+            <button type="submit" class="btn btn-dark" id="abm_start">Начать расчеты</button>
+        </div>
+    </div>
+
+
+    <div class="row m-3">
+        <div class="col-3">
+
+            <label class="label-lrp" for="len">Его длина:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="l_">l:</span>
+                <input type="text" class="form-control" id="len" pattern="^[01]*$"
+                       required aria-describedby="l_" readonly aria-label="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-3">
+
+            <label class="label-lrp" for="k_abm">Его порядок:</label>
+
+        </div>
+
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="l_">k:</span>
+                <input type="text" class="form-control" id="k_abm" pattern="^[01]*$"
+                       required aria-describedby="l_" readonly aria-label="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-3">
+
+            <label class="label-lrp" for="l">Характеристический многочлен:</label>
+
+        </div>
+
+        <div class="col-2">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="bm_">L:</span>
+                <input type="text" class="form-control" id="bm"
+                       required aria-describedby="bm_" readonly aria-label="">
+            </div>
+        </div>
+    </div>
+
+    <div class="m-3">
+        <h4> Подробные расчёты представленные в таблице</h4>
+    </div>
+    <div class="container-sm">
+        <div class="row m-3 table-container " id="tableContainer">
+
+        </div>
+    </div>
 {% endblock %}

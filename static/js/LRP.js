@@ -9,11 +9,17 @@ lrpStartButton.addEventListener("click", function () {
 
     let url = new URL(window.location.origin + API_V1_PREFIX + '/lrp');
     let params = new URLSearchParams();
-    params.append('pol1', pol1);
-    params.append('pol0', pol0);
-    url.search = params.toString();
-
-    fetch(url)
+    var body = {
+        pol1: pol1,
+        pol0: pol0
+    };
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
         .then(response => response.json())
         .then(data => {
                 document.getElementById('k').value = data.k;
@@ -25,7 +31,6 @@ lrpStartButton.addEventListener("click", function () {
             }
         );
 });
-
 
 // document.getElementById('lrp_start')
 //     .onclick((d) => {
