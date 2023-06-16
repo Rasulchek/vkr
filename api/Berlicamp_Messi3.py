@@ -170,7 +170,7 @@ def Berlicamp_Messi3(lp):
     g1 = g.copy()
     h1 = h.copy()
 
-    L = []
+    L = str()
 
     for j in range(1, l + 1):
         g1 = Mul3(b, h)
@@ -194,12 +194,12 @@ def Berlicamp_Messi3(lp):
     h = ToStr(g)
     l_h = len(h)
     for i in range(0, l_h):
-        L.insert(0, int(h[i]))
+        L += h[i]
     r = int(k + 0.5 - m * 0.4)
     deg = len(ToStr(g)) - 1
     for i in range(0, r - deg):
-        L.insert(0, 0)
+        L += str(0)
     LL = str()
     for i in range(len(L)):
-        LL += (str(int(L[i])))
+        LL += L[i]
     return l, k, g_list, h_list, m_list, b_list, LL

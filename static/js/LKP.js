@@ -3,7 +3,8 @@ const API_V1_PREFIX = '/api/v1';
 // Получение элементов формы
 var fieldp = document.getElementById('p');
 var fieldq = document.getElementById('q');
-var fielde = document.getElementById('e');
+var fielde1 = document.getElementById('e1');
+var fielde2 = document.getElementById('e2');
 var fieldm = document.getElementById('m');
 var fielda = document.getElementById('a');
 var fieldc = document.getElementById('c');
@@ -12,9 +13,10 @@ var fieldc = document.getElementById('c');
 function calculateFieldm() {
     var valuep = parseInt(fieldp.value);
     var valueq = parseInt(fieldq.value);
-    var valuee = parseInt(fielde.value);
-    if (!isNaN(valuep) && !isNaN(valuee) && !isNaN(valueq)) {
-        var res = Math.pow(valuep, valuee) + Math.pow(valueq, valuee);
+    var valuee1 = parseInt(fielde1.value);
+    var valuee2 = parseInt(fielde2.value);
+    if (!isNaN(valuep) && !isNaN(valuee1) && !isNaN(valuee2) && !isNaN(valueq)) {
+        var res = Math.pow(valuep, valuee1) * Math.pow(valueq, valuee2);
         fieldm.value = res;
     }
 }
@@ -23,7 +25,10 @@ function calculateFieldm() {
 fieldp.addEventListener('change', calculateFieldm);
 
 // Обработчик события изменения поля e
-fielde.addEventListener('change', calculateFieldm);
+fielde1.addEventListener('change', calculateFieldm);
+
+// Обработчик события изменения поля e
+fielde2.addEventListener('change', calculateFieldm);
 
 // Обработчик события изменения поля q
 fieldq.addEventListener('change', calculateFieldm);
@@ -47,7 +52,7 @@ function testprim() {
 
     let a = document.getElementById('a').value;
     let p = document.getElementById('p').value;
-    let e = document.getElementById('e').value;
+    let e = document.getElementById('e1').value;
 
 
     let url = new URL(window.location.origin + API_V1_PREFIX + '/lkpTPr');
@@ -80,12 +85,12 @@ function testprim() {
 
 function check_testprim() {
     var fieldp = document.getElementById('p');
-    var fielde = document.getElementById('e');
+    var fielde1 = document.getElementById('e1');
     var fielda = document.getElementById('a');
     var valuep = parseInt(fieldp.value);
     var valuea = parseInt(fielda.value);
-    var valuee = parseInt(fielde.value);
-    if (!isNaN(valuep) && !isNaN(valuee) && !isNaN(valuea)) {
+    var valuee1 = parseInt(fielde1.value);
+    if (!isNaN(valuep) && !isNaN(valuee1) && !isNaN(valuea)) {
         testprim();
     }
 }
@@ -94,7 +99,7 @@ function check_testprim() {
 fieldp.addEventListener('change', check_testprim);
 
 // Обработчик события изменения поля e
-fielde.addEventListener('change', check_testprim);
+fielde1.addEventListener('change', check_testprim);
 
 // Обработчик события изменения поля q
 fielda.addEventListener('change', check_testprim);
@@ -131,15 +136,15 @@ function testmulprim() {
                 }
                 if (data.massage1 === false || data.massage2 === false || data.massage3 === false) {
                     if (data.massage1 === false) {
-                        text += '1) b = a-1 делится на все простые делители числа m ';
+                        text += '1) b = a-1 не делится на все простые делители числа m ';
                         text += '<br> '
                     }
                     if (data.massage2 === false) {
-                        text += '2) если m делится на 4, то и b делится на 4';
+                        text += '2) если m делится на 4, то и b должно делится на 4';
                         text += ' <br> '
                     }
                     if (data.massage3 === false) {
-                        text += '3) число c взаимно простое с m ';
+                        text += '3) число c не взаимно простое с m ';
                     }
                     mas.innerHTML = text
                     hideElement('tm_s');
@@ -174,7 +179,7 @@ fieldp.addEventListener('change', check_testmulprim);
 
 fieldq.addEventListener('change', check_testmulprim);
 
-fielde.addEventListener('change', check_testmulprim);
+fielde1.addEventListener('change', check_testmulprim);
 
 
 function lkppower() {
@@ -236,7 +241,7 @@ fieldp.addEventListener('change', check_lkppower);
 
 fieldq.addEventListener('change', check_lkppower);
 
-fielde.addEventListener('change', check_lkppower);
+fielde1.addEventListener('change', check_lkppower);
 
 
 const culkEl = document.getElementById("calculate_element");

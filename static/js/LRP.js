@@ -1,5 +1,9 @@
 const API_V1_PREFIX = '/api/v1';
 
+function checkBinaryInput(input) {
+        input.value = input.value.replace(/[^01]/g, "");
+    }
+
 const lrpStartButton = document.getElementById("lrp_start");
 
 lrpStartButton.addEventListener("click", function () {

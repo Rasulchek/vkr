@@ -43,7 +43,7 @@
         <div class="col-3">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="an">P:</span>
-                <input type="text" class="form-control" id="anpol" pattern="^[01]*$"
+                <input type="text" class="form-control" id="anpol" oninput="checkBinaryInput(this)" pattern="^[01]*$"
                        required aria-describedby="an">
             </div>
         </div>

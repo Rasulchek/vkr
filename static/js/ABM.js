@@ -1,5 +1,13 @@
 const API_V1_PREFIX = '/api/v1';
 
+function checkBinaryInput(input) {
+        if (document.getElementById('field').value === "2")
+        input.value = input.value.replace(/[^01]/g, "");
+        else {
+            input.value = input.value.replace(/[^012]/g, "");
+        }
+    }
+
 const abmStartButton = document.getElementById("abm_start");
 
 function reloadScript() {
@@ -60,6 +68,9 @@ abmStartButton.addEventListener("click", function () {
                 var thead = document.createElement("thead");
                 var headerRow = document.createElement("tr");
 
+                var th = document.createElement("th");
+                th.innerHTML = "\\( j \\)";
+                headerRow.appendChild(th);
 
                 var th = document.createElement("th");
                 th.innerHTML = "\\( g \\)";
@@ -84,6 +95,10 @@ abmStartButton.addEventListener("click", function () {
                 var tbody = document.createElement("tbody");
                 for (var i = 0; i < maxLength; i++) {
                     var row = document.createElement("tr");
+
+                    var cellj = document.createElement("td");
+                    cellj.textContent = "\\( " + i + " \\)";
+                    row.appendChild(cellj);
 
                     var cell1 = document.createElement("td");
                     cell1.textContent = i < data.g_list.length ? "\\( " + data.g_list[i] + " \\)" : "";

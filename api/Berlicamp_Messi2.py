@@ -138,7 +138,7 @@ def Berlicamp_Messi2(lp):
     m_list.append(str(m))
     b_list.append(ToStr(b))
 
-    L = []
+    L = str()
 
     for j in range(1, l + 1):
         g1 = Mul2(b, h)
@@ -161,5 +161,5 @@ def Berlicamp_Messi2(lp):
         b_list.append(ToStr(b))
     g = ToStr(g)
     for i in range(0, len(g)):
-        L.insert(0, int(g[i]))
+        L += g[i]
     return l, k, g_list, h_list, m_list, b_list, L

@@ -59,14 +59,14 @@
 
             <label class="label-lrp" for="m">Модуль m,</label>
             <br>
-            <label class="label-lrp" for="m">\(m=p^{e1}+q^{e2}\)</label>
+            <label class="label-lrp" for="m">\(m=p^{e1}q^{e2}\)</label>
 
         </div>
 
         <div class="col-1">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="m_">m:</span>
-                <input type="text" class="form-control" id="m" value="2"
+                <input type="text" class="form-control" id="m" value="1"
                        aria-describedby="m_" readonly aria-label="">
             </div>
 
@@ -90,9 +90,17 @@
         </div>
         <div class="col-1">
             <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="e_">e:</span>
-                <input type="text" class="form-control" id="e" value="1"
-                       aria-describedby="e_">
+                <span class="input-group-text" id="e1_">e1:</span>
+                <input type="text" class="form-control" id="e1" value="1"
+                       aria-describedby="e1_">
+            </div>
+
+        </div>
+        <div class="col-1">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="e2_">e2:</span>
+                <input type="text" class="form-control" id="e2" value="1"
+                       aria-describedby="e2_">
             </div>
 
         </div>
@@ -255,8 +263,8 @@
     </div>
 
     <div class="m-5">
-    <label for="lrp"  class="label-lrp">Полученное ЛКП:</label>
-    <textarea id="lrp" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+        <label for="lrp" class="label-lrp">Полученное ЛКП:</label>
+        <textarea id="lrp" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
     </div>
 
 {% endblock %}

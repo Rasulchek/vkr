@@ -13,7 +13,10 @@ from api.LKP_functions import lkp_power
 from api.LKP_functions import calc_arbitrary_el
 from api.LKP_functions import calculate_lkp
 from api.BBS_functions import bbs_generator
-
+from api.BBS_functions import MillerRabinTest
+from api.Seal_functions import SEAL
+from api.Seal_functions import encrypt
+from api.Seal_functions import decrypt
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -163,4 +166,68 @@ def bbsSolve(request, **kwargs):
         'L': L,
     }
     print(p, q)
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def bbsMillerRabin(request, **kwargs):
+    data = json.loads(request.body)
+    p = data.get('p')
+    q = data.get('q')
+
+    test1 = MillerRabinTest(p, 20)
+    test2 = MillerRabinTest(q, 20)
+    data = {
+        'test1': test1,
+        'test2': test2,
+    }
+    print(p, test1, q, test2)
+    return JsonResponse(data, safe=False)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def sealSolve(request, **kwargs):
+    data = json.loads(request.body)
+    a = data.get('a')
+    n = data.get('n')
+
+    key, T, S, R = SEAL(a, n)
+    data = {
+        'key': key,
+        'T': T,
+        'S': S,
+        'R': R,
+    }
+    print(a, n)
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def sealEncr(request, **kwargs):
+    data = json.loads(request.body)
+    text = data.get('text')
+
+    text16, etext = encrypt(text)
+    data = {
+        'text16': text16,
+        'etext': etext,
+    }
+    print(text)
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def sealDecr(request, **kwargs):
+    data = json.loads(request.body)
+    etext = data.get('etext')
+
+    detext, detext16 = decrypt(etext)
+    data = {
+        'detext': detext,
+        'detext16': detext16,
+    }
+    print(detext)
     return JsonResponse(data, safe=False)

@@ -7,6 +7,10 @@ from api.views import lkpPower
 from api.views import calcelem
 from api.views import lkpSolve
 from api.views import bbsSolve
+from api.views import bbsMillerRabin
+from api.views import sealSolve
+from api.views import sealEncr
+from api.views import sealDecr
 
 urlpatterns = [
     path('lrp', lrpSolve),
@@ -17,4 +21,9 @@ urlpatterns = [
     path('calcel', calcelem),
     path('lkp', lkpSolve),
     path('bbs', bbsSolve),
+    path('bbsmr', bbsMillerRabin),
+    path('seal', sealSolve),
+    path('sealencr', sealEncr),
+    path('sealdecr', sealDecr),
+
 ]

@@ -18,7 +18,7 @@ function hideElement(elementId) {
 var fieldp = document.getElementById('p');
 var fieldq = document.getElementById('q');
 
-function testСongruent() {
+function testCongruate() {
     var text = ""
     var valuep = parseInt(fieldp.value);
     var valueq = parseInt(fieldq.value);
@@ -38,23 +38,50 @@ function testСongruent() {
     }
     if (res2 !== 3) {
         text += 'Q не конгруэнтно 3 по модулю 4'
+        text += '<br> '
     }
-    if (res1 !== 3 || res2 !== 3) {
-        mas.innerHTML = text
-        hideElement('bbs_s');
-        showElement('bbs_a');
-    } else {
-        hideElement('bbs_a');
-        showElement('bbs_s');
-    }
+
+    let url = new URL(window.location.origin + API_V1_PREFIX + '/bbsmr');
+    let params = new URLSearchParams();
+    var body = {
+        p: valuep,
+        q: valueq,
+    };
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
+        .then(response => response.json())
+        .then(data => {
+                if (data.test1 === false) {
+                    text += 'P не простое';
+                    text += '<br> ';
+                }
+                if (data.test2 === false) {
+                    text += 'Q не простое';
+                    text += '<br> ';
+                }
+                if (res1 !== 3 || res2 !== 3 || data.test1 === false || data.test2 === false) {
+                    mas.innerHTML = text
+                    hideElement('bbs_s');
+                    showElement('bbs_a');
+                } else {
+                    hideElement('bbs_a');
+                    showElement('bbs_s');
+                }
+            }
+        );
+
 }
 
 // Обработчик события изменения поля p
-fieldp.addEventListener('change', testСongruent);
+fieldp.addEventListener('change', testCongruate);
 
 // Обработчик события изменения поля q
-fieldq.addEventListener('change', testСongruent);
-
+fieldq.addEventListener('change', testCongruate);
 
 const bbsstart = document.getElementById("calculate_bbs");
 

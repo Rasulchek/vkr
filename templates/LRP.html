@@ -26,9 +26,9 @@
         <div class='col-3'>
 
             <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="p1">P</span>
-                <input type="text" class="form-control" placeholder="многочлен" id="pol1" pattern="^[01]*$"
-                       required aria-describedby="p1">
+                <span class="input-group-text" id="p1" >P</span>
+                <input type="text" class="form-control" placeholder="многочлен" id="pol1"
+                       required aria-describedby="p1" oninput="checkBinaryInput(this)">
             </div>
             <br>
             <button type="submit" class="btn btn-dark" id="lrp_start">Начать расчеты</button>
@@ -38,8 +38,8 @@
 
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="p2">P'</span>
-                <input type="text" class="form-control" placeholder="начальное состояние" id="pol0" pattern="^[01]*$"
-                       required aria-describedby="p2">
+                <input type="text" class="form-control" placeholder="начальное состояние" id="pol0"
+                       required aria-describedby="p2" oninput="checkBinaryInput(this)">
             </div>
         </div>
     </div>

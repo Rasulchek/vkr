@@ -2,10 +2,105 @@
 {% load static %}
 
 {% block scripts %}
-
+    <script type="text/javascript" src={% static "js/SEAL.js" %}></script>
 {% endblock %}
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'styles/LRP.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2> SEAL </h2>
+    <div class="m-3">
+        <h4>Алгоритм шифрования SEAL</h4>
+    </div>
+    <div class="m-3" style="font-size: 1.2em">Секретный 160-битовый ключ(в двоичном виде)
+    </div>
+    <div class="m-3">
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="secret_key_">key</span>
+            <input type="text" class="form-control" id="secret_key" oninput="checkBinaryInput(this)"
+                   value="0110011101000101001000110000000111101111110011011010101110001001100110001011101011011100111111100001000000110010010101000111011011000011110100101110000111110000"
+                   aria-describedby="secret_key_">
+        </div>
+
+    </div>
+
+    <div class="row m-1">
+        <label class="label-lrp" for="n">Число последовательности:</label>
+        <div class="col-2">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="n_">n</span>
+                <input type="text" class="form-control" id="n" value="20281263"
+                       aria-describedby="n_">
+            </div>
+        </div>
+
+        <div class="col-3"></div>
+
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark" id="calculate_seal">Создать поток ключей</button>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-4">
+            <label for="T" class="label-lrp">Таблица T:</label>
+            <textarea id="T" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+        </div>
+        <div class="col-4">
+            <label for="S" class="label-lrp">Таблица S:</label>
+            <textarea id="S" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+        </div>
+        <div class="col-4">
+            <label for="R" class="label-lrp">Таблица R:</label>
+            <textarea id="R" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+        </div>
+    </div>
+
+    <div class="m-3">
+        <label for="key" class="label-lrp">Ключевой поток:</label>
+        <textarea id="key" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+    </div>
+    <div class="m-3">
+        <div style="font-size: 1.2em; font-weight: bold">Пример использования ключевого потока в шифре
+            гаммирования(открытый текст XOR гамма)
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col-4">
+            <label for="text" class="label-lrp">Открытый текст:</label>
+            <textarea id="text" class="form-control" style="height: 200px"></textarea>
+        </div>
+        <div class="col-4">
+            <label for="text16" class="label-lrp">Битовое представление:</label>
+            <textarea id="text16" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col-8"></div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark" id="encrypt">Зашифровать</button>
+        </div>
+    </div>
+    <div class="m-3 col-4">
+        <label for="etext" class="label-lrp">Зашифрованный текст:</label>
+        <textarea id="etext" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+    </div>
+     <div class="row m-3">
+        <div class="col-5"></div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark" id="decrypt">Расшифровать</button>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-4">
+            <label for="detext" class="label-lrp">Расшифрованный текст:</label>
+            <textarea id="detext" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+        </div>
+        <div class="col-4">
+            <label for="detext16" class="label-lrp">Битовое представление:</label>
+            <textarea id="detext16" class="form-control" readonly aria-label="" style="height: 200px"></textarea>
+        </div>
+    </div>
 {% endblock %}
