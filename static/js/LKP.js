@@ -52,7 +52,9 @@ function testprim() {
 
     let a = document.getElementById('a').value;
     let p = document.getElementById('p').value;
-    let e = document.getElementById('e1').value;
+    let e1 = document.getElementById('e1').value;
+    let q = document.getElementById('q').value;
+    let e2 = document.getElementById('e2').value;
 
 
     let url = new URL(window.location.origin + API_V1_PREFIX + '/lkpTPr');
@@ -60,7 +62,9 @@ function testprim() {
     var body = {
         a: a,
         p: p,
-        e: e
+        e1: e1,
+        q: q,
+        e2: e2,
     };
     fetch(url, {
         method: "POST",
@@ -86,11 +90,15 @@ function testprim() {
 function check_testprim() {
     var fieldp = document.getElementById('p');
     var fielde1 = document.getElementById('e1');
+    var fieldq = document.getElementById('q');
+    var fielde2 = document.getElementById('e2');
     var fielda = document.getElementById('a');
     var valuep = parseInt(fieldp.value);
+    var valueq = parseInt(fieldq.value);
     var valuea = parseInt(fielda.value);
     var valuee1 = parseInt(fielde1.value);
-    if (!isNaN(valuep) && !isNaN(valuee1) && !isNaN(valuea)) {
+    var valuee2 = parseInt(fielde2.value);
+    if (!isNaN(valuep) && !isNaN(valuee1) && !isNaN(valuea) && !isNaN(valueq) && !isNaN(valuee2)) {
         testprim();
     }
 }
@@ -98,10 +106,16 @@ function check_testprim() {
 // Обработчик события изменения поля p
 fieldp.addEventListener('change', check_testprim);
 
-// Обработчик события изменения поля e
+// Обработчик события изменения поля e1
 fielde1.addEventListener('change', check_testprim);
 
 // Обработчик события изменения поля q
+fieldq.addEventListener('change', check_testprim);
+
+// Обработчик события изменения поля e2
+fielde2.addEventListener('change', check_testprim);
+
+// Обработчик события изменения поля a
 fielda.addEventListener('change', check_testprim);
 
 
@@ -231,10 +245,8 @@ function check_lkppower() {
     }
 }
 
-// Обработчик события изменения поля p
 fielda.addEventListener('change', check_lkppower);
 
-// Обработчик события изменения поля q
 fieldm.addEventListener('change', check_lkppower);
 
 fieldp.addEventListener('change', check_lkppower);

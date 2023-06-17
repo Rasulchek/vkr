@@ -35,24 +35,3 @@ lrpStartButton.addEventListener("click", function () {
             }
         );
 });
-
-// document.getElementById('lrp_start')
-//     .onclick((d) => {
-//     let pol1 = document.getElementById('pol1').value;
-//     console.log(pol1);
-// });
-
-// const form = document.querySelector('form');
-//         form.addEventListener('submit', (event) => {
-//             const inputField1 = document.getElementById('pol0');
-//             const inputField2 = document.getElementById('pol1');
-//             if (!inputField1.checkValidity() || !inputField2.checkValidity()) {
-//                 event.preventDefault();
-//                 event.stopPropagation();
-//                 inputField1.classList.add('is-invalid');
-//                 inputField2.classList.add('is-invalid');
-//             } else {
-//                 inputField1.classList.remove('is-invalid');
-//                 inputField2.classList.remove('is-invalid');
-//             }
-//         });

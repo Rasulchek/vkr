@@ -70,9 +70,11 @@ def lkpTestPrim(request, **kwargs):
     data = json.loads(request.body)
     a = data.get('a')
     p = data.get('p')
-    e = data.get('e')
+    e1 = data.get('e1')
+    q = data.get('q')
+    e2 = data.get('e2')
 
-    massage = testprimitivedeg(a, p, e)
+    massage = testprimitivedeg(a, p, e1, q, e2)
     data = {
         'massage': massage,
     }

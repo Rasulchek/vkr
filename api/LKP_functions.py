@@ -1,3 +1,49 @@
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+
+def power(x, y, p):
+    res = 1
+    x = x % p
+    while y > 0:
+        if y & 1:
+            res = (res * x) % p
+        y = y >> 1
+        x = (x * x) % p
+    return res
+
+
+def find_factors(n):
+    factors = set()
+    i = 2
+    while i * i <= n:
+        if n % i:
+            i += 1
+        else:
+            n //= i
+            factors.add(i)
+    if n > 1:
+        factors.add(n)
+    return factors
+
+
+def testprimitivedeg(a, p, e1, q, e2):
+    a = int(a)
+    p = int(p)
+    q = int(q)
+    e1 = int(e1)
+    e2 = int(e2)
+    m = (p**e1) * (q**e2)
+    phi_val = m * (1 - 1/p) * (1 - 1/q)
+    factors = find_factors(int(phi_val))
+    for it in factors:
+        if power(a, int(phi_val) // it, m) == 1:
+            return False
+    return True
+
+
 def Factor(n):
     Ans = []
     d = 2
@@ -11,6 +57,9 @@ def Factor(n):
                 Ans.append([d, i])
             i = 0
             d += 1
+    if d == 2 and i == 0:
+        Ans.append([1, 1])
+        return Ans
     Ans.append([d, i])
     return Ans
 
@@ -43,30 +92,13 @@ def test_multip_prim(a, c, m):
     lf = Factor(m)
     print(lf)
     for i in range(0, len(lf)):
-        if b % lf[i][0] != 0:
+        if b % lf[i][0] != 0 and lf[i][0] != 1:
             test1 = False
     if m % 4 == 0 and b % 4 != 0:
         test2 = False
     if euclid(c, m) != 1:
         test3 = False
     return test1, test2, test3
-
-
-def testprimitivedeg(a, p, e):
-    a = int(a)
-    p = int(p)
-    e = int(e)
-    lf = Factor(p - 1)
-    if e == 1:
-        return testprimitive(a, p, lf)
-    else:
-        for i in range(0, int(len(lf))):
-            if a % p == 0 or (a ** (p ** (e - 1) * (p - 1) // lf[i][0])) % p == 1:
-                return False
-            else:
-                if a ** (p - 1) % (p ** 2) == 1:
-                    return False
-    return True
 
 
 def lkp_power(a, m):

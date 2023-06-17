@@ -89,7 +89,7 @@ def summod(A, B):
         return odd(sum)
 
 
-def mult(A, B):
+def Mul(A, B):
     if type(A) == Polynom:
         a = A.coef.copy()
     else:
@@ -156,7 +156,7 @@ def poww(A, k):
         sol = np.array([1.])
     else:
         for i in range(k - 1):
-            sol = mult(sol, A)
+            sol = Mul(sol, A)
             sol = odd(sol)
     if type(sol) == Polynom:
         return sol
@@ -164,7 +164,7 @@ def poww(A, k):
         return sol
 
 
-def powingf(A, k, P):
+def powgf2(A, k, P):
     a = A.coef
     d = to_two(k)
     b = np.array([1.])
@@ -172,7 +172,7 @@ def powingf(A, k, P):
         return np.array([1.])
     else:
         for i in range(d.shape[0]):
-            b = mult(poww(b, 2), poww(a, int(d[i])))
+            b = Mul(poww(b, 2), poww(a, int(d[i])))
             b = mod(b, P)
         return b
 
@@ -180,14 +180,14 @@ def powingf(A, k, P):
 def Trace(P, a):
     m2 = Polynom([0])
     for i in range(0, P.coef.shape[0] - 1):
-        m1 = powingf(a, 2 ** i, P)
+        m1 = powgf2(a, 2 ** i, P)
         m2 = mod(sum_pol(m2, m1), P)
     return m2
 
 
 def FormulaGM(P, alpha, i):
     lambd = Polynom([0, 1])
-    F = mod(mult(alpha, powingf(lambd, i, P)), P)
+    F = mod(Mul(alpha, powgf2(lambd, i, P)), P)
     F = Trace(P, F)
     return F
 
@@ -206,19 +206,19 @@ def Lrp(p, L1):
         L1 += str(g1)
 
     L = str()
-    alpha = Polynom([0, 0, 0, 0, 1])
+    alpha = Polynom([0, 1, 0, 0, 1])
 
     for i in range(0, int(2 ** (int(len(p))))):
         F = FormulaGM(P, alpha, i)
         L = L + ToStr(F)
     L2 = str()
-    alpha = Polynom([1, 1, 0, 0, 1])
+    alpha = Polynom([0, 1])
     while L2.find(L1) != 0:
         L2 = str()
         lamb = Polynom([0, 1])
         for i in range(0, int(2 ** (int(len(p))))):
             F = FormulaGM(P, alpha, i)
             L2 = L2 + ToStr(F)
-        alpha = mod(mult(alpha, lamb), P)
+        alpha = mod(Mul(alpha, lamb), P)
     alpha = ToStr(alpha)
     return k, d, L1, L2, alpha, L.find(L2) + 1
